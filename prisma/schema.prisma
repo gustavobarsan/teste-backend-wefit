@@ -1,0 +1,38 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  profileType String
+  cnpj        String?  @unique
+  cpf         String?  @unique
+  name        String
+  phone       String?
+  cellPhone   String
+  email       String   @unique
+  address     Address  @relation(fields: [addressId], references: [id])
+  addressId   String   @unique
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Address {
+  id              String   @id @default(cuid())
+  cep             String
+  number          String
+  streetAddress   String
+  aptSuiteUnit    String?
+  city            String
+  district        String
+  state           String
+  profile         Profile? @relation
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

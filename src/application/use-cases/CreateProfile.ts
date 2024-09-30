@@ -15,7 +15,7 @@ type CreateProfileRequest = {
 export class CreateProfile {
   constructor(private readonly profileRepository: ProfileRepository) {}
 
-  async execute(request: CreateProfileRequest): Promise<Profile> {
+  async execute(request: CreateProfileRequest): Promise<void> {
     const { profileType, cnpj, cpf, name, phone, cellPhone, email, address } =
       request
 
@@ -29,7 +29,6 @@ export class CreateProfile {
       cpf ?? "",
       phone ?? ""
     )
-
-    return this.profileRepository.create(profile)
+    this.profileRepository.create(profile)
   }
 }

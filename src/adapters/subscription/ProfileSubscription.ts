@@ -3,9 +3,9 @@ import { CreateProfile } from "../../application/use-cases/CreateProfile"
 export class ProfileController {
   constructor(private readonly createProfileUseCase: CreateProfile) {}
 
-  async createProfile(req: any, res: any) {
-    const { profileType, cnpj, cpf, name, phone, cellPhone, email, address } =
-      req.body
+  async createProfile(msg: string) {
+    const msgBody = JSON.parse(msg)
+    const { profileType, cnpj, cpf, name, phone, cellPhone, email, address } = msgBody
 
     try {
       const profile = await this.createProfileUseCase.execute({
@@ -18,9 +18,9 @@ export class ProfileController {
         email,
         address,
       })
-      res.status(201).json(profile)
+      console.log("Profile created", profile)
     } catch (error: any) {
-      res.status(400).json({ error: error.message })
+      console.log("Error creating profile", error)
     }
   }
 }

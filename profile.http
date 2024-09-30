@@ -1,0 +1,23 @@
+POST /profiles HTTP/1.1
+Host: localhost:4568
+Content-Type: application/json
+Accept: application/json
+
+{
+  "profileType": "PF",
+  "cnpj": "12345678000195",
+  "cpf": "12345678909",
+  "name": "João da Silva",
+  "phone": "123456789",
+  "cellPhone": "987654321",
+  "email": "joao@dasilva.com",
+  "address": {
+    "cep": "12345678",
+    "number": "123",
+    "streetAddress": "Rua Exemplo",
+    "aptSuiteUnit": "Apto 1",
+    "city": "Cidade Exemplo",
+    "district": "Bairro Exemplo",
+    "state": "Estado Exemplo"
+  }
+}
